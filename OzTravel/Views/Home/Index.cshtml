@@ -1,0 +1,74 @@
+﻿@model HomeIndexViewModel
+
+<header class="row">
+    <div class="col">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="2500">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-content">
+                        <h1 class="display-4" style="color:white">Explore Australia your own way with exclusive luxury packages</h1>
+                        <br />
+                        <p><a class="btn btn-primary btn-lg" style="background-color:blue; border-color:blue" href="#home-first-section" role="button">Browse Destinations</a></p>
+                    </div>
+                    <img class="d-block w-100 mx-auto" src="~/images/australiabeachbikini785066.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-content">
+                        <h1 class="display-4" style="color:white">Explore Australia your own way with exclusive luxury packages</h1>
+                        <br />
+                        <p><a class="btn btn-primary btn-lg" style="background-color:blue; border-color:blue" href="#home-first-section" role="button">Browse Destinations</a></p>
+                    </div>
+                    <img class="d-block w-100 mx-auto" src="~/images/australiabeachbondibeach785133.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-content">
+                        <h1 class="display-4" style="color:white">Explore Australia your own way with exclusive luxury packages</h1>
+                        <br />
+                        <p><a class="btn btn-primary btn-lg" style="background-color:blue; border-color:blue" href="#home-first-section" role="button">Browse Destinations</a></p>
+                    </div>
+                    <img class="d-block w-100 mx-auto" src="~/images/beachbondibeachcoast785065.jpg" alt="Third slide">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid"  id="home-first-section">
+
+    <br />
+    <br />
+
+    @*<h3>Escapes by City</h3>*@
+
+    @foreach (var item in Model.Locations)
+    {
+
+
+        <div class="container">
+            <div class="row">
+                <div ng-view class="col-xs-2"></div>
+                <div ng-view class="col-xs-8 content">
+                    <h5>Featured @item.Name Escapes</h5>
+                    <div class="card-deck row m-5">
+
+                        @foreach (var package in Model.Packages.Where(p => p.Location == item.Name).Take(4))
+                        {
+                            <div class="card" style="max-width: 18rem;">
+                                <a href="@Url.Action("Details", "Package", new { id = package.PackageId})">
+                                    <img class="card-img-top" src="~/uploads/package/@package.Picture" alt="location photo">
+                                    <div class="card-img-overlay">
+                                    </div>
+                                </a>
+                                <div class="card-footer text-center bg-dark">
+                                    <p class="card-title text-light font-weight-bold">@package.Name</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div ng-view class="col-xs-2"></div>
+            </div>
+        </div>
+
+    }
+</div>
